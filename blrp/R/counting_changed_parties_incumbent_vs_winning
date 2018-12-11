@@ -1,0 +1,21 @@
+
+
+load('Election_Data2.Rdata')
+N <- length(Election_Data$District)
+
+currentYear <- 0
+for (i in 1: N) {
+    if(currentYear != Election_Data$Election_Year[i]) {
+        if(currentYear!=0){
+        cat("last year",currentYear,"", count, "\n")
+        }
+        count <- 0
+        
+    }
+    currentYear <-Election_Data$Election_Year[i]
+    inc <- Election_Data$Incumbent_Party[i]
+    win <- Election_Data$Winning_Party[i]
+    if (!is.na(inc) & !is.na(win) & inc !=win) count <- count +1;
+    if (is.na(inc) | is.na(win)) count <- count +1;
+}
+ cat("last year",currentYear,"", count, "\n")
